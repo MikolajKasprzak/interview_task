@@ -1,0 +1,15 @@
+python3_verification: true # turn on/off deployment of application running on Python 3.9
+python3_verification_vars:
+  image_name: project_verifier # name of the image
+  image_tag: python3
+  schedule: "*/1 * * * *" # cron expresion how often run application, Required
+  nodeSelector: # select on with nodes deploy app, Optional
+    python_env: "3.9"
+python2_verification: true
+python2_verification_vars: # turn on/off deployment of application running on Python 2.7
+  image_name: project_verifier
+  image_tag: python2
+  schedule: "*/1 * * * *" # cron expresion how often run application, Required
+  nodeSelector: # select on with nodes deploy app, Optional
+    python_env: "2.7"
+pv_hostpath: /data/pv_verifier_results/ # where to store artefacts from application. Path on k8s node

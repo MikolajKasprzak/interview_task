@@ -1,0 +1,32 @@
+{{ if .Values.python3_verification }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-job-py3
+spec:
+  schedule: {{ .Values.python3_verification_vars.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+          - name: verifier-pv-storage
+            persistentVolumeClaim:
+              claimName: {{ .Release.Name }}-pv-claim
+          containers:
+          - name: {{ .Release.Name }}-container
+            image: {{ .Values.python3_verification_vars.image_name }}:{{ .Values.python3_verification_vars.image_tag }}
+            env:
+            - name: RESULTS_PV_PATH
+              value: "/app/results/"
+            imagePullPolicy: Never
+            volumeMounts:
+              - mountPath: "/app/results"
+                name: verifier-pv-storage
+          restartPolicy: Never
+          {{- if .Values.python3_verification_vars.nodeSelector }}
+          nodeSelector: 
+          {{- toYaml .Values.python3_verification_vars.nodeSelector | nindent 12 }}
+          {{- end }}
+      backoffLimit: 1
+{{ end }}
