@@ -1,9 +1,9 @@
 # interview_task
 Project contains: 
-- Specialised software application.py
-- Python script run.py (works in python 2.7 and python 3.9 envoirement) that will run application.py and generate artifacts in persitance volume.
+- Specialized software application.py
+- Python script run.py (works in python 2.7 and python 3.9 environment) that will run application.py and generate artifacts in persistence volume.
 - Docker images for each of python version 2.7 and 3.9
-- Helm chart with create Cron Job that create pod and neccassary volumes
+- Helm chart with create Cron Job that create pod and necessary volumes
 
 Configuration file is in interview_task/project_verifier/values.yaml where is possible to configure: how often run application, select nodes etc.
 
@@ -54,7 +54,7 @@ stdout.txt content
 ```sh
 2021-11-08T18:03:01.334252+01:00
 ```
-vesion.txt content
+version.txt content
 ```sh
 Python 2.7.18
 ```
